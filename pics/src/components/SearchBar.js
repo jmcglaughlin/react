@@ -6,6 +6,10 @@ class SearchBar extends React.Component {
   onFormSubmit(event) {
     // circumvent form clearing data on enter by using event.preventDefault() method
     event.preventDefault();
+
+    // we have no access to this from render!!!
+    // TypeError: Cannot read property 'state' of undefined
+    console.log(this.state.term);
   }
 
   render() {
