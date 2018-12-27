@@ -8,12 +8,16 @@ const source = 'https://api.unsplash.com/search/photos',
 class App extends React.Component {
   // callback function for the child
   onSearchSubmit(term) {
-    axios.get(source, {
-      params: { query: term },
-      headers: {
-        Authorization: 'Client-ID ' + authKey
-      }
-    });
+    axios
+      .get(source, {
+        params: { query: term },
+        headers: {
+          Authorization: 'Client-ID ' + authKey
+        }
+      })
+      .then(response => {
+        console.log(response.data.results);
+      });
   }
 
   render() {

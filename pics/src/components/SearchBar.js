@@ -1,7 +1,7 @@
 import React from 'react';
 
 class SearchBar extends React.Component {
-  state = { term: 'enter search term' };
+  state = { term: '' };
 
   // change to arrow function
   onFormSubmit = event => {
