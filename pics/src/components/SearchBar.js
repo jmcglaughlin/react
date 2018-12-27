@@ -3,14 +3,13 @@ import React from 'react';
 class SearchBar extends React.Component {
   state = { term: 'enter search term' };
 
-  onFormSubmit(event) {
-    // circumvent form clearing data on enter by using event.preventDefault() method
+  // change to arrow function
+  onFormSubmit = event => {
     event.preventDefault();
 
-    // we have no access to this from render!!!
-    // TypeError: Cannot read property 'state' of undefined
+    // ES5 binds this to arrow functions
     console.log(this.state.term);
-  }
+  };
 
   render() {
     return (
