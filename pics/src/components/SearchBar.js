@@ -3,10 +3,15 @@ import React from 'react';
 class SearchBar extends React.Component {
   state = { term: 'enter search term' };
 
+  onFormSubmit(event) {
+    // circumvent form clearing data on enter by using event.preventDefault() method
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div className="ui segment">
-        <form className="ui form">
+        <form onSubmit={this.onFormSubmit} className="ui form">
           <div className="field">
             <label>ImageSearch: </label>
             <input
