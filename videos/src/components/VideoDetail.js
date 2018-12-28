@@ -12,7 +12,7 @@ const VideoDetail = ({ video }) => {
     <div>
       {/* use seantics to embed an iframe for youtube player */}
       <div className="ui embed">
-        <iframe src={videoSrc} />
+        <iframe src={videoSrc} alt="Video Player" />
       </div>
       <div className="ui segment">
         <h4 className="ui header">{video.snippet.title}</h4>
