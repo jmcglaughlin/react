@@ -4,7 +4,7 @@ import youtube from '../api/youtube';
 import VideoList from './VideoList';
 
 class App extends React.Component {
-  state = { videos: [] };
+  state = { videos: [], selectedVideo: null };
 
   // Setup call back for youtube submit
   onTermSubmit = async term => {
@@ -16,12 +16,19 @@ class App extends React.Component {
     this.setState({ videos: response.data.items });
   };
 
+  onVideoSelect = video => {
+    this.setState({ selectedVideo: video });
+  };
+
   render() {
     return (
       <div className="ui container">
         {/*  wire callback to process youtube submittal */}
-        <SearchBar onTermSubmit={this.onTermSubmit} />
-        <VideoList videos={this.state.videos} />
+        <SearchBar onTermSubmit={this.onTermSubmit} />>
+        <VideoList
+          onVideoSelect={this.onVideoSelect}
+          videos={this.state.videos}
+        />
       </div>
     );
   }
