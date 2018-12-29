@@ -4,8 +4,14 @@ import youtube from '../api/youtube';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 
+const defaultTerm = 'buildings';
+
 class App extends React.Component {
   state = { videos: [], selectedVideo: null };
+
+  componentDidMount() {
+    this.onTermSubmit(defaultTerm);
+  }
 
   // Setup call back for youtube submit
   onTermSubmit = async term => {
@@ -14,7 +20,11 @@ class App extends React.Component {
       params: { q: term }
     });
     // use setState for binding to frontend
-    this.setState({ videos: response.data.items });
+    // pre-select a video so we don't have crappy white space
+    this.setState({
+      videos: response.data.items,
+      selectedVideo: response.data.items[0]
+    });
   };
 
   onVideoSelect = video => {
