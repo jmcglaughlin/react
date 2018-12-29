@@ -1,5 +1,6 @@
 // Alternative deconstruct Component
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class SongList extends Component {
   render() {
@@ -7,4 +8,5 @@ class SongList extends Component {
   }
 }
 
-export default SongList;
+//  connect function executes the Songlist funciton
+export default connect()(SongList);
