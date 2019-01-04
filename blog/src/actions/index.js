@@ -1,8 +1,8 @@
-import jsonPlaceholder from '../api/jsonPlaceholder';
+import jsonPlaceholder from '../apis/jsonPlaceholder';
 
 // Long code
 // export const fetchPosts = () => {
-//   // return function (disatch, getState) {
+//   // return function (dispatch, getState) {
 //   return async dispatch => {
 //     //not using getState so can drop
 //     const response = await jsonPlaceholder.get('/posts');
@@ -14,8 +14,8 @@ import jsonPlaceholder from '../api/jsonPlaceholder';
 // };
 
 // shortCode
-export const fetchPosts = async dispatch => {
+export const fetchPosts = () => async dispatch => {
   const response = await jsonPlaceholder.get('/posts');
 
-  dispatch({ type: 'FETCH_POSTS', payload: response });
+  dispatch({ type: 'FETCH_POSTS', payload: response.data });
 };
