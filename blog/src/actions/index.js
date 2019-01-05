@@ -18,16 +18,12 @@ import jsonPlaceholder from '../apis/jsonPlaceholder';
 export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   await dispatch(fetchPosts());
 
-  // make use of lodash specialty methods uniq and map
-  // _map pulls out the 'userId' parameter from posts array
-  // then _.uniq extracts only userIds
-  const userIds = _.uniq(_.map(getState().posts, 'userId'));
-  console.log(userIds);
-  // we do not need an await because we don't care since nothing else is dependent on it
-  userIds.forEach(userId => dispatch(fetchUser(userId)));
-
-  // NOTE We are still calling 100 times!!!
-  // UserHeader.js is still attempting to get it's own data which is no longer necessary
+  // leverage lodash _chain to reduce method
+  _.chain(getState().posts)
+    .map('userId')
+    .uniq()
+    .forEach(userId => dispatch(fetchUser(userId)))
+    .value(); // need this key function to execute the chain
 };
 
 // shortCode
