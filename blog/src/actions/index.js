@@ -22,10 +22,12 @@ export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   // _map pulls out the 'userId' parameter from posts array
   // then _.uniq extracts only userIds
   const userIds = _.uniq(_.map(getState().posts, 'userId'));
-
+  console.log(userIds);
   // we do not need an await because we don't care since nothing else is dependent on it
-  userIds.forEach(id => dispatch(fetchUser()));
+  userIds.forEach(userId => dispatch(fetchUser(userId)));
+
   // NOTE We are still calling 100 times!!!
+  // UserHeader.js is still attempting to get it's own data which is no longer necessary
 };
 
 // shortCode
@@ -36,12 +38,13 @@ export const fetchPosts = () => async dispatch => {
 };
 
 export const fetchUser = id => async dispatch => {
+  console.log(id);
   const response = await jsonPlaceholder.get(`/users/${id}`);
 
   dispatch({ type: 'FETCH_USER', payload: response.data });
 };
 
-export const fetchUser2 = id => dispatch => {
+export const fetchUser183 = id => dispatch => {
   _fetchUser(id, dispatch);
 };
 
