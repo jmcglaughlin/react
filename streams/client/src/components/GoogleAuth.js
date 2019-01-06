@@ -15,7 +15,7 @@ class GoogleAuth extends React.Component {
         })
         .then(() => {
           // get instance of authentication and set our react state for isSignedIn
-          this.auth = window.gapi.auth2.getAuthInstance(); // Get gogl auth obj
+          this.auth = window.gapi.auth2.getAuthInstance(); // Get google auth obj
 
           // So call refactored onAutChange passing the state and let it decide
           this.onAuthChange(this.auth.isSignedIn.get());
@@ -28,7 +28,7 @@ class GoogleAuth extends React.Component {
   onAuthChange = isSignedIn => {
     //is actually a bool so we can pass in isSignedIn
     if (isSignedIn) {
-      this.props.signIn();
+      this.props.signIn(this.auth.currentUser.get().getId());
     } else {
       this.props.signOut();
     }
