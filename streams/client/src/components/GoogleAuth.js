@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions';
 
 class GoogleAuth extends React.Component {
-  // state = { isSignedIn: null }; Remove now in redux
   componentDidMount() {
     // One time call to load google api OAuth library
     window.gapi.load('client:auth2', () => {
@@ -18,22 +17,13 @@ class GoogleAuth extends React.Component {
           // get instance of authentication and set our react state for isSignedIn
           this.auth = window.gapi.auth2.getAuthInstance(); // Get gogl auth obj
 
-          // No longer need state here but need to record
-          // this.setState({ isSignedIn: this.auth.isSignedIn.get() }); // Set state so we can access
-
-          // So cal refactored onAutChange passing the state and let it decide
+          // So call refactored onAutChange passing the state and let it decide
           this.onAuthChange(this.auth.isSignedIn.get());
 
           this.auth.isSignedIn.listen(this.onAuthChange); // Setup listener to see login/out
         });
     });
   }
-
-  // REAFACTOR FOR REDUX
-  // onAuthChange = () => {
-  //   // Listen for changes in Google Login state
-  //   this.setState({ isSignedIn: this.auth.isSignedIn.get() });
-  // };
 
   onAuthChange = isSignedIn => {
     //is actually a bool so we can pass in isSignedIn
